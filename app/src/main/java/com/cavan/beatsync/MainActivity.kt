@@ -37,6 +37,27 @@ class MainActivity : AppCompatActivity() {
 
     var heartrate: Int = 0
 
+    var zone1_pos = 0
+    val zone1 = listOf("spotify:track:2tznHmp70DxMyr2XhWLOW0",
+                        "spotify:track:5fGWdNGGnvKrrHL6U7c1Vp",
+                        "spotify:track:35QAUfIbfIXT3p3cWhaKxZ",
+                        "spotify:track:51UtgWS4z1eMPuLQOzPtNH",
+                        "spotify:track:5JmJVj3qLsCnBsQ8IC9XLf")
+
+    var zone2_pos = 0
+    val zone2 = listOf("spotify:track:46efwIlSpvdURIubZCs3jC",
+                        "spotify:track:2ZTOEvJeCpaHkWMMKc0ewp",
+                        "spotify:track:30LGMhbzgN7poYNYvfTEsi",
+                        "spotify:track:6RBMpENxbx74lTdR5SBcaF",
+                        "spotify:track:1Y2ExJJ9Dmb9po8K0ybSj3")
+
+    var zone3_pos = 0
+    val zone3 = listOf("spotify:track:63wsuMhok6GgcBRd2strGk",
+                        "spotify:track:6GXlXAfXR7C6u1VjR3VMsm",
+                        "spotify:track:6TFGNgCyhgHKNn046iG6fa",
+                        "spotify:track:6NvRxjfYkkT2SpirAlmsjH",
+                        "spotify:track:0HPMKvONbUTomRuuG1LScC")
+
     var heartratespotify: Int by Delegates.observable(0) {
             prop, old, new ->
             if (new > -1) {
@@ -56,11 +77,26 @@ class MainActivity : AppCompatActivity() {
                                     it.playerApi.queue("spotify:track:3VEFybccRTeWSZRkJxDuNR")
 
                                 }
-                            else if (new > 50) {
+                            else if (new >= 50 && new < 100) {
                                 spotifyAppRemote?.let {
-                                    it.playerApi.queue("spotify:track:78lgmZwycJ3nzsdgmPPGNx")
+                                    it.playerApi.queue(zone1[zone1_pos])
 
                                 }
+                                zone1_pos = (zone1_pos + 1) % zone1.size
+                            }
+                            else if (new >= 100 && new < 130) {
+                                spotifyAppRemote?.let {
+                                    it.playerApi.queue(zone2[zone2_pos])
+
+                                }
+                                zone2_pos = (zone2_pos + 1) % zone2.size
+                            }
+                            else if (new >= 130) {
+                                spotifyAppRemote?.let {
+                                    it.playerApi.queue(zone3[zone3_pos])
+
+                                }
+                                zone3_pos = (zone3_pos + 1) % zone3.size
                             }
                         }
                     }
@@ -159,7 +195,7 @@ class MainActivity : AppCompatActivity() {
                     //val trackURI = "spotify:track:1ReO26lbDWtjPdtsaWzSXS"
                     //it.playerApi.play(trackURI)
                     it.playerApi.play("spotify:track:3KkXRkHbMCARz0aVfEt68P")
-                    it.playerApi.queue("spotify:track:6TqXcAFInzjp0bODyvrWEq")
+                    //it.playerApi.queue("spotify:track:6TqXcAFInzjp0bODyvrWEq")
                     //it.playerApi.play("spotify:track:6TqXcAFInzjp0bODyvrWEq")
                     // Subscribe to PlayerState
                     /*it.playerApi.subscribeToPlayerState().setEventCallback {
