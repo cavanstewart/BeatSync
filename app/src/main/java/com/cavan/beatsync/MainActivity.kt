@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
     var heartrate: Int = 0
 
+
+    //first heartrate zone 50-99 beats per minute
     var zone1_pos = 0
     val zone1 = listOf("spotify:track:2tznHmp70DxMyr2XhWLOW0",
                         "spotify:track:5fGWdNGGnvKrrHL6U7c1Vp",
@@ -44,6 +46,8 @@ class MainActivity : AppCompatActivity() {
                         "spotify:track:51UtgWS4z1eMPuLQOzPtNH",
                         "spotify:track:5JmJVj3qLsCnBsQ8IC9XLf")
 
+
+    //second heartrate zone 100-129 beats per minute
     var zone2_pos = 0
     val zone2 = listOf("spotify:track:46efwIlSpvdURIubZCs3jC",
                         "spotify:track:2ZTOEvJeCpaHkWMMKc0ewp",
@@ -51,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                         "spotify:track:6RBMpENxbx74lTdR5SBcaF",
                         "spotify:track:1Y2ExJJ9Dmb9po8K0ybSj3")
 
+
+    //third heartrate zone 130+ beats per minute
     var zone3_pos = 0
     val zone3 = listOf("spotify:track:63wsuMhok6GgcBRd2strGk",
                         "spotify:track:6GXlXAfXR7C6u1VjR3VMsm",
@@ -58,6 +64,8 @@ class MainActivity : AppCompatActivity() {
                         "spotify:track:6NvRxjfYkkT2SpirAlmsjH",
                         "spotify:track:0HPMKvONbUTomRuuG1LScC")
 
+
+    //observes when heatrate variable changes and runs function in response
     var heartratespotify: Int by Delegates.observable(0) {
             prop, old, new ->
             if (new > -1) {
@@ -179,8 +187,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        //inthecorner(heartrate)
-
         val connectionParams = ConnectionParams.Builder(clientId)
             .setRedirectUri(redirectUri)
             .build()
@@ -191,27 +197,9 @@ class MainActivity : AppCompatActivity() {
                 spotifyAppRemote = appRemote
 
                 spotifyAppRemote?.let {
-                    // Play a playlist
-                    //val trackURI = "spotify:track:1ReO26lbDWtjPdtsaWzSXS"
-                    //it.playerApi.play(trackURI)
+                    //TODO: replace inital song with initial playlist selection
                     it.playerApi.play("spotify:track:3KkXRkHbMCARz0aVfEt68P")
-                    //it.playerApi.queue("spotify:track:6TqXcAFInzjp0bODyvrWEq")
-                    //it.playerApi.play("spotify:track:6TqXcAFInzjp0bODyvrWEq")
-                    // Subscribe to PlayerState
-                    /*it.playerApi.subscribeToPlayerState().setEventCallback {
-                        val track: Track = it.track
-                        Log.d("MainActivity", track.name + " by " + track.artist.name)
-                    }*/
                 }
-
-                //spotifyAppRemote?.let {
-
-
-                    /*it.playerApi.subscribeToPlayerState().setEventCallback {
-                        val track: Track = it.track
-                        Log.d("MainActivity", track.name + " by " + track.artist.name)
-                    }*/
-                //}
 
             }
 
